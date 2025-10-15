@@ -1,0 +1,18 @@
+<div class="container">
+  <h1>Mall Management</h1>
+
+  <form (ngSubmit)="addMall()">
+    <input [(ngModel)]="newMall.mallName" name="mallName" placeholder="Mall Name" required />
+    <input [(ngModel)]="newMall.location" name="location" placeholder="Location" required />
+    <input [(ngModel)]="newMall.totalShops" name="totalShops" type="number" placeholder="Total Shops" required />
+    <input [(ngModel)]="newMall.areaSqFt" name="areaSqFt" type="number" placeholder="Area (sq ft)" required />
+    <button type="submit">Add Mall</button>
+  </form>
+
+  <ul>
+    <li *ngFor="let mall of malls">
+      <strong>{{ mall.mallName }}</strong> — {{ mall.location }} — {{ mall.totalShops }} shops — {{ mall.areaSqFt }} sq ft
+      <button (click)="deleteMall(mall.id!)">Delete</button>
+    </li>
+  </ul>
+</div>
