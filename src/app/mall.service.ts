@@ -24,6 +24,10 @@ export class MallService {
     return this.http.post<Mall>(this.baseUrl, mall);
   }
 
+  update(id: number, mall: Mall): Observable<Mall> {
+    return this.http.put<Mall>(`${this.baseUrl}/${id}`, mall);
+  }
+
   delete(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
   }

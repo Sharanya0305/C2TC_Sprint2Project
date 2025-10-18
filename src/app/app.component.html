@@ -1,18 +1,40 @@
-<div class="container">
-  <h1>Mall Management</h1>
+<div class="dashboard">
+  <!-- Mall Entry Form -->
+  <div class="form-section">
+    <h2>{{ isEditing ? '✏️ Edit Mall' : ' Mall Management' }}</h2>
+    <form (ngSubmit)="addMall()" class="mall-form">
+      <label>Mall Name</label>
+      <input [(ngModel)]="newMall.mallName" name="mallName" placeholder="Enter mall name" required />
 
-  <form (ngSubmit)="addMall()">
-    <input [(ngModel)]="newMall.mallName" name="mallName" placeholder="Mall Name" required />
-    <input [(ngModel)]="newMall.location" name="location" placeholder="Location" required />
-    <input [(ngModel)]="newMall.totalShops" name="totalShops" type="number" placeholder="Total Shops" required />
-    <input [(ngModel)]="newMall.areaSqFt" name="areaSqFt" type="number" placeholder="Area (sq ft)" required />
-    <button type="submit">Add Mall</button>
-  </form>
+      <label>Location</label>
+      <input [(ngModel)]="newMall.location" name="location" placeholder="Enter location" required />
 
-  <ul>
-    <li *ngFor="let mall of malls">
-      <strong>{{ mall.mallName }}</strong> — {{ mall.location }} — {{ mall.totalShops }} shops — {{ mall.areaSqFt }} sq ft
-      <button (click)="deleteMall(mall.id!)">Delete</button>
-    </li>
-  </ul>
+      <label>Total Shops</label>
+      <input [(ngModel)]="newMall.totalShops" name="totalShops" type="number" placeholder="Total shops" required />
+
+      <label>Area (sq ft)</label>
+      <input [(ngModel)]="newMall.areaSqFt" name="areaSqFt" type="number" placeholder="Area in sq ft" required />
+
+      <div class="form-buttons">
+        <button type="submit">{{ isEditing ? 'Update Mall 📝' : 'Add Mall ✅' }}</button>
+        <button type="button" *ngIf="isEditing" (click)="resetForm()">Cancel ❌</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Available Malls List -->
+  <div class="list-section">
+    <h2>🏬 Available Malls</h2>
+    <div *ngFor="let mall of malls" class="mall-card">
+      <h3>{{ mall.mallName }}</h3>
+      <p><strong>📍 Location:</strong> {{ mall.location }}</p>
+      <p><strong>🛍️ Shops:</strong> {{ mall.totalShops }}</p>
+      <p><strong>📐 Area:</strong> {{ mall.areaSqFt }} sq ft</p>
+
+      <div class="actions">
+        <button class="edit-btn" (click)="editMall(mall)">Edit</button>
+        <button class="delete-btn" (click)="deleteMall(mall.id!)">Delete</button>
+      </div>
+    </div>
+  </div>
 </div>
